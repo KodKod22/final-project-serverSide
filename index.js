@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 8081;
-const { soldierRouter } = require('../routers/soldier_router');
+const  soldierRouter  = require('../routers/soldier_router');
 
 app.use((req, res, next) => {
     res.set({
