@@ -14,7 +14,7 @@ async function createConnection() {
         console.log("[DB] successfully entered the Database.");
     }catch(err){
         console.log("Failed to connect to DB");
-        throw Error(err);
+        throw err;
     }
 }
 
