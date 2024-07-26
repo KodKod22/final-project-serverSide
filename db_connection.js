@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mysql = require('mysql2/promise');
 
 let con = null;
@@ -10,10 +11,10 @@ async function createConnection() {
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME
         });
-        console.log("[DB] successfully entered the Database.")
+        console.log("[DB] successfully entered the Database.");
     }catch(err){
         console.log("Failed to connect to DB");
-        throw new Error(err);
+        throw Error(err);
     }
 }
 
