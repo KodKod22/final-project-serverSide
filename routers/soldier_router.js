@@ -1,7 +1,5 @@
-const express = require('express');
-const soldierRouter = express.Router();
+const ms = require('../server/main');
+
 const { soldier_controller } = require('../controllers/soldier_controller');
 
-soldierRouter.post('/addSoldier', soldier_controller.addSoldier);
-
-module.exports = soldierRouter;
+ms.getApp().post('/api/soldiers/addSoldier', soldier_controller.addSoldier);
