@@ -9,8 +9,6 @@ exports.soldier_controller = {
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
                 [body.s_id, body.soldier_name, body.s_role, body.s_rank, body.years_in_unit, body.riflery, body.date_of_birth, body.s_img]
             );
-    
-            connection.end();
             res.status(201).json({ success: true });
         } catch (error) {
             console.error('Error inserting user:', error);
