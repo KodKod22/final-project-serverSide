@@ -21,12 +21,6 @@ app.use(express.static('public'));
 
 app.use('/api/soldiers', soldierRouter);
 
-
-app.use((req, res) => {
-    console.error('Path not found:', req.path);
-    res.status(400).send('something is broken!');
-});
-
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
