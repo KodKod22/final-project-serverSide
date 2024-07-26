@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
+const multer = require('multer');
 const port = process.env.PORT || 8081;
 
 app.use((req, res, next) => {
@@ -14,9 +14,21 @@ app.use((req, res, next) => {
     next();
 });
 
+const upload = multer({
+    limits: { fileSize: 300 * 1024 }, 
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png)$/)) {
+            return cb(new Error('Please upload a PNG image'));
+        }
+        cb(null, true);
+    }
+});
+
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('public'));
+
+app.post('/api/soldiers/addSoldier', upload.single('s_img'), soldierController.addSoldier);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
