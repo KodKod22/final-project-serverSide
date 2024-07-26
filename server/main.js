@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const app = express();
 const port = process.env.PORT || 8081;
+const bodyParser = require('body-parser');
 
 app.use((req, res, next) => {
     res.set({
