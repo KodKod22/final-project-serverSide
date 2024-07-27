@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const port = process.env.PORT || 8081;
-const { addSoldier } = require('../controllers/soldier_controller')
+const soldierRouter= require('../routers/soldier_router');
 
 app.use((req, res, next) => {
     res.set({
@@ -31,7 +31,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('public'));
 
-app.post('/api/soldiers/addSoldier', upload.single('s_img'), addSoldier);
+app.use('/api/soldiers', soldierRouter);
 
 
 app.listen(port, () => {
@@ -42,7 +42,7 @@ module.exports = {
     getApp: () => {
        if(!app)
         throw new Error ("Unable to find App proccess");
-    
        return app;
-    }
+    },
+    upload
 }
