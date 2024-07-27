@@ -45,4 +45,4 @@ module.exports = {
        return app;
     },
     upload
-}
+};
