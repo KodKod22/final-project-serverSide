@@ -3,6 +3,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const port = process.env.PORT || 8081;
+const { addSoldier } = require('../controllers/soldier_controller')
 
 app.use((req, res, next) => {
     res.set({
@@ -14,7 +15,9 @@ app.use((req, res, next) => {
     next();
 });
 
+const storage = multer.memoryStorage();
 const upload = multer({
+    storage: storage,
     limits: { fileSize: 300 * 1024 }, 
     fileFilter(req, file, cb) {
         if (!file.originalname.match(/\.(png)$/)) {

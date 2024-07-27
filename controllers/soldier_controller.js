@@ -2,7 +2,6 @@ exports.soldier_controller = {
     async addSoldier(req, res) {
         const { dbConnection } = require('../db_connection');
         let db = dbConnection.getConnection();
-        const { body } = req;
         try {
             const { soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth } = req.body;
             const s_img = req.file;
@@ -25,3 +24,7 @@ exports.soldier_controller = {
         }
     }
 }
+
+module.exports = {
+    addSoldier
+};
