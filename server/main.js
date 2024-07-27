@@ -32,6 +32,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.post('/api/soldiers/addSoldier', upload.single('s_img'), addSoldier);
+app.use(soldierRouter);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
