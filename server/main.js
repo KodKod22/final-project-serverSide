@@ -1,7 +1,6 @@
 import express from 'express';
 const app = express();
 import bodyParser from 'body-parser';
-console.log(process.env.PORT);
 const port = process.env.PORT || 8081;
 import  router  from '../routers/soldier_router.js';
 

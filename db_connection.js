@@ -2,7 +2,10 @@ import { config } from 'dotenv';
 import { createConnection} from 'mysql2/promise'
 config();
 
-
+console.log(process.env.DB_HOST);
+console.log(process.env.DB_USERNAME);
+console.log(process.env.DB_PASSWORD);
+console.log(process.env.DB_NAME);
 let con = null;
 
 async function createConnectionMySql() {
