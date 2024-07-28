@@ -12,7 +12,7 @@ const addSoldier = async(req, res) => {
         }
 
         const [result] = await db.execute(
-            'INSERT INTO soldiers (soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO tbl_111_soldiers (soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
             [soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img.buffer]
         );
     

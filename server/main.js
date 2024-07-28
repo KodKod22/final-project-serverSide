@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 8081;
-const { soldier_controller } = require('../controllers/soldier_controller');
+const { soldier_router } = require('../routers/soldier_router');
 
 app.use((req, res, next) => {
     res.set({
@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('public'));
 
-app.post('/api/soldiers', soldier_controller);
+app.post('/api/soldiers', soldier_router);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
