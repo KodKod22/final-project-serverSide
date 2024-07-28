@@ -7,7 +7,7 @@ export const addSoldier = async(req, res) => {
     
         console.log('Received data:', { soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img });
     
-        if (!soldierID || !name || !role || !rank || !yearsInTheUnits || !riflery || !dateOfBirth || !s_img) {
+        if (!soldierID || !name || !role || !rank || !yearsInTheUnits || !riflery || !dateOfBirth ) {
             throw new Error('Missing required fields');
         }
 
