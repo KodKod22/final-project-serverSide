@@ -1,4 +1,6 @@
 const ms = require('../server/main');
-const { soldier_controller } = require('../controllers/soldier_controller');
+const { addSoldier } = require('../controllers/soldier_controller');
 
-ms.getApp().post('/api/soldiers/addSoldier', soldier_controller.addSoldier);
+const app = ms.getApp();
+
+app.post('/addSoldier', addSoldier);
