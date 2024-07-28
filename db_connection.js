@@ -1,8 +1,7 @@
 import { config } from 'dotenv';
-// import mysql from 'mysql2'
 import { createConnection} from 'mysql2/promise'
 config();
-// const promise = mysql.promise;
+
 
 let con = null;
 

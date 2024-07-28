@@ -1,11 +1,10 @@
 import express from 'express';
-// const express = require('express');
 const app = express();
 import bodyParser from 'body-parser';
-// const bodyParser = require('body-parser');
+console.log(process.env.PORT);
 const port = process.env.PORT || 8081;
 import  router  from '../routers/soldier_router.js';
-// const { soldier_router } = require('../routers/soldier_router');
+
 
 app.use((req, res, next) => {
     res.set({
