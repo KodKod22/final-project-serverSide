@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('public'));
 
-app.post('/api/soldiers', router);
+app.use('/api/soldiers', router);
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);

@@ -1,6 +1,5 @@
 import { dbConnection } from '../db_connection.js';
 export const addSoldier = async(req, res) => {
-    // const { dbConnection } = require('../db_connection');
     let db = dbConnection.getConnection();
     try {
         const { soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth } = req.body;
