@@ -1,4 +1,4 @@
-exports.addSoldier = async(req, res) => {
+export const addSoldier = async(req, res) => {
     const { dbConnection } = require('../db_connection');
     let db = dbConnection.getConnection();
     try {
