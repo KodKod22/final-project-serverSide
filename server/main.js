@@ -30,4 +30,4 @@ const getApp = () => {
     return app;
 };
 
-exports.module = getApp();
+exports.module = getApp;
