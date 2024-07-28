@@ -33,7 +33,6 @@ app.use(express.static('public'));
 
 app.use('/api/soldiers', soldierRouter);
 
-
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
