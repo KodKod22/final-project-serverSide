@@ -1,4 +1,4 @@
-export const addSoldier = async(req, res) => {
+const addSoldier = async(req, res) => {
     const { dbConnection } = require('../db_connection');
     let db = dbConnection.getConnection();
     try {
@@ -22,3 +22,5 @@ export const addSoldier = async(req, res) => {
         res.status(500).send(false);
     }
 }
+
+exports.module = addSoldier;
