@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 8081;
-const { addSoldier } = require('../controllers/soldier_controller')
+
 
 app.use((req, res, next) => {
     res.set({
