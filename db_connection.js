@@ -1,11 +1,14 @@
-require('dotenv').config();
-const mysql = require('mysql2/promise');
+import { config } from 'dotenv';
+// import mysql from 'mysql2'
+import { createConnection} from 'mysql2/promise'
+config();
+// const promise = mysql.promise;
 
 let con = null;
 
-async function createConnection() {
+async function createConnectionMySql() {
     try {
-        con = await mysql.createConnection({
+        con = await createConnection({
             host: process.env.DB_HOST,
             user: process.env.DB_USERNAME,
             password: process.env.DB_PASSWORD ,
@@ -18,9 +21,9 @@ async function createConnection() {
     }
 }
 
-exports.dbConnection = {
-    createConnection,
+export const dbConnection = {
+    createConnectionMySql,
     getConnection: () => {
         return con;
-    }
-};
+    } 
+}

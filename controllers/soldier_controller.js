@@ -1,5 +1,6 @@
-const addSoldier = async(req, res) => {
-    const { dbConnection } = require('../db_connection');
+import { dbConnection } from '../db_connection.js';
+export const addSoldier = async(req, res) => {
+    // const { dbConnection } = require('../db_connection');
     let db = dbConnection.getConnection();
     try {
         const { soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth } = req.body;
@@ -23,4 +24,4 @@ const addSoldier = async(req, res) => {
     }
 }
 
-exports.module = addSoldier;
+// exports.module = addSoldier;
