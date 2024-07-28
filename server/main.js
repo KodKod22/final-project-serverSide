@@ -24,10 +24,10 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
-module.exports = {
-    getApp: () => {
-       if(!app)
+const getApp = () => {
+    if(!app)
         throw new Error ("Unable to find App proccess");
-       return app;
-    }
+    return app;
 };
+
+exports.module = getApp();
