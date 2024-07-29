@@ -23,5 +23,9 @@ app.get("/simulation",(req,res)=>{
 
 app.use('/api/post',operatorRouter);
 
+app.use((req,res)=>{
+    res.status(400).send("Something is broken");
+});
+
 app.listen(port);
 console.log(`listening on port ${port}`);

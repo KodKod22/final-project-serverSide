@@ -11,7 +11,7 @@
             "participants":"שני צוותי טנק.",
             "difficulty":"קל.",
             "date":"15.05.2020",
-            "picture":"../images/event0.jpg"
+            "picture":"../images/event0.png"
         },
         {
             "id":"1",
@@ -23,7 +23,7 @@
             "participants":"צוות טנק חילוץ.",
             "date":"02.01.2018",
             "difficulty":"קל.",
-            "picture":"../images/event1.jpg"
+            "picture":"../images/event1.png"
         },
         {
             "id":"2",
@@ -35,7 +35,7 @@
             "participants":"צוות טנק ,נהג. D9,מפעיל D9",
             "difficulty":"קל.",
             "date":"02.01.2018",
-            "picture":"../images/event2.jpg"
+            "picture":"../images/event2.png"
         },
         {
             "id":"3",
@@ -47,7 +47,7 @@
             "participants":"צוות טנק חילוץ.",
             "difficulty":"קשה",
             "date":"15.05.2020",
-            "picture":"../images/event3.jpg"
+            "picture":"../images/event3.png"
         },
         {
             "id":"4",
@@ -59,7 +59,7 @@
             "participants":"צוות טנק ,נהג D9,מפעיל D9.",
             "difficulty":"קשה.",
             "date":"21.02.2024",
-            "picture":"../images/event4.jpg"
+            "picture":"../images/event4.png"
         },
         {
             "id":"5",
@@ -71,7 +71,7 @@
             "participants":"שני צוותי טנק,קצין חילוץ,נהג טנק חילוץ ומפקד טנק חילוץ.",
             "difficulty":"קל.",
             "date":"21.02.2024",
-            "picture":"../images/event5.jpg"
+            "picture":"../images/event5.png"
         },
         {
             "id":"6",
@@ -83,7 +83,7 @@
             "participants":"מפעיל D9,נהג D9.",
             "difficulty":"קל.",
             "date":"21.02.2024",
-            "picture":"../images/event6.jpg"
+            "picture":"../images/event6.png"
         }
         
     ]

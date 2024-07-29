@@ -5,13 +5,13 @@
             "id":"1",
             "userName":"שמעון",
             "password":"12345",
-            "profile":"../images/commander.jpg"
+            "profile":"../images/commander.png"
         },
         {
             "id":"2",
             "userName":"רותם",
             "password":"987654",
-            "profile":"../images/opertor.jpg"
+            "profile":"../images/opertor.png"
         }
     ]
 }
