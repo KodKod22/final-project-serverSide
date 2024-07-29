@@ -5,3 +5,4 @@ module.exports = {operatorRouter};
 
 operatorRouter.get('/Simulations',operatorController.getSimulations);
 operatorRouter.get('/user',operatorController.getUser);
+operatorRouter.delete('/deleteSimulations',operatorController.deleteSimulations);
