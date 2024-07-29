@@ -4,6 +4,7 @@ exports.soldier_controller = {
     async addSoldier(req, res) {
         const { body } = req;
         try {
+            console.log(body)
             const result = await db.pQuery(
                 `INSERT INTO tbl_111_soldiers(soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img) 
                  VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
