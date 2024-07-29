@@ -2,10 +2,9 @@ import { dbConnection } from '../db_connection.js';
 export const addSoldier = async(req, res) => {
     let db = dbConnection.getConnection();
     try {
-        const { soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth } = req.body;
-        const s_img = req.file;
+        const { soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth , s_img } = req.body;
     
-        console.log('Received data:', { soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img });
+        console.log('Received data:', soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img);
     
         if (!soldierID || !name || !role || !rank || !yearsInTheUnits || !riflery || !dateOfBirth ) {
             throw new Error('Missing required fields');
@@ -13,7 +12,7 @@ export const addSoldier = async(req, res) => {
 
         const [result] = await db.execute(
             'INSERT INTO tbl_111_soldiers (soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-            [soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img.buffer]
+            [soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img]
         );
     
         res.status(200).json({ message: 'Soldier added successfully' });
