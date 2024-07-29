@@ -34,5 +34,6 @@ async function pQuery(databaseQuery, params) {
 }
 
 module.exports = {
+    initialize,
     pQuery
 };
