@@ -1,11 +1,8 @@
-import dotenv  from 'dotenv';
-dotenv.config();
-import express from 'express';
+const express = require('express');
 const app = express();
-import bodyParser from 'body-parser';
-const port = process.env.PORT || 8081;
-import  router  from '../routers/soldier_router.js';
+const bodyParser = require('body-parser');
 
+const port = process.env.PORT || 8081;
 
 app.use((req, res, next) => {
     res.set({
@@ -21,15 +18,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('public'));
 
-app.use('/api/soldiers', router);
-
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
 
-export const getApp = () => {
-    if(!app)
+module.exports = {
+    getApp: () => {
+       if(!app)
         throw new Error ("Unable to find App proccess");
-    return app;
-};
-
+    
+       return app;
+    }
+}

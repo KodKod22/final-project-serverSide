@@ -1,12 +1,11 @@
-import  dotenv  from 'dotenv';
-import { createConnection} from 'mysql2/promise'
-dotenv.config();
+require('dotenv').config();
+const mysql = require('mysql2/promise');
 
 let con = null;
 
-async function createConnectionMySql() {
+async function createConnection() {
     try {
-        con = await createConnection({
+        con = await mysql.createConnection({
             host: process.env.DB_HOST || '148.66.138.145',
             user: process.env.DB_USERNAME || 'dbusrShnkr24',
             password: process.env.DB_PASSWORD || 'studDBpwWeb2!',
@@ -19,9 +18,9 @@ async function createConnectionMySql() {
     }
 }
 
-export const dbConnection = {
-    createConnectionMySql,
+exports.dbConnection = {
+    createConnection,
     getConnection: () => {
         return con;
-    } 
-}
+    }
+};

@@ -1,7 +1,5 @@
-import express from 'express';
-import { addSoldier } from '../controllers/soldier_controller.js';
+const ms = require('../server/main');
 
-const router = express.Router();
-router.post('/addSoldier', addSoldier);
+const { soldier_controller } = require('../controllers/soldier_controller');
 
-export default router;
+ms.getApp().post('/api/soldiers/addSoldier', soldier_controller.addSoldier);
