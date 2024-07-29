@@ -1,6 +1,9 @@
 const express = require('express');
+const http = require('http');
 const app = express();
 const bodyParser = require('body-parser');
+
+var server;
 
 const port = process.env.PORT || 8081;
 
@@ -23,6 +26,10 @@ app.listen(port, () => {
 });
 
 module.exports = {
+    createServer: () => {
+        server = http.createServer(app);
+        return server;
+    },
     getApp: () => {
        if(!app)
         throw new Error ("Unable to find App proccess");
