@@ -1,0 +1,17 @@
+{
+    "category": "users",
+    "users": [
+        {
+            "id":"1",
+            "userName":"שמעון",
+            "password":"12345",
+            "profile":"../images/commander.jpg"
+        },
+        {
+            "id":"2",
+            "userName":"רותם",
+            "password":"987654",
+            "profile":"../images/opertor.jpg"
+        }
+    ]
+}

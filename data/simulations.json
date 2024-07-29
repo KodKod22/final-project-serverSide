@@ -1,0 +1,90 @@
+{
+    "category": "simulations",
+    "simulations": [
+        {
+            "id":"0",
+            "simulationName":"חילוץ טנק שנתקע",
+            "simulation": "חילוץ טנק סימן 4 שנתקע.",
+            "location":"רמת הגולן.",
+            "afvToRescue":"טנק סימן 4.",
+            "RescueVehicle":"טנק סימן 4.",
+            "participants":"שני צוותי טנק.",
+            "difficulty":"קל.",
+            "date":"15.05.2020",
+            "picture":"../images/event0.jpg"
+        },
+        {
+            "id":"1",
+            "simulationName":"חילוץ טנק מעמק",
+            "simulation":"חילוץ טנק סימן 2 מעמק.",
+            "location":"רמת הגולן.",
+            "afvToRescue":"טנק סימן 2.",
+            "RescueVehicle":"טנק חילוץ.",
+            "participants":"צוות טנק חילוץ.",
+            "date":"02.01.2018",
+            "difficulty":"קל.",
+            "picture":"../images/event1.jpg"
+        },
+        {
+            "id":"2",
+            "simulationName":"חילוץ טנק שטבע",
+            "simulation":"חילוץ טנק סימן 4 שטבע.",
+            "location":"עוטף עזה.",
+            "afvToRescue":"טנק סימן 4.",
+            "RescueVehicle":"D9.",
+            "participants":"צוות טנק ,נהג. D9,מפעיל D9",
+            "difficulty":"קל.",
+            "date":"02.01.2018",
+            "picture":"../images/event2.jpg"
+        },
+        {
+            "id":"3",
+            "simulationName":"היפוך פגר",
+            "simulation":"היפוך פגר.",
+            "location":"רמת הגולן.",
+            "afvToRescue":"טנק.",
+            "RescueVehicle":"טנק חילוץ.",
+            "participants":"צוות טנק חילוץ.",
+            "difficulty":"קשה",
+            "date":"15.05.2020",
+            "picture":"../images/event3.jpg"
+        },
+        {
+            "id":"4",
+            "simulationName":"חילוץ מורכב של טנק",
+            "simulation":"חילוץ מורכב של טנק סימן 4ץ",
+            "location":"עזה.",
+            "afvToRescue":"טנק סימן 4.",
+            "RescueVehicle":"טנק סימן 4 ,D9.",
+            "participants":"צוות טנק ,נהג D9,מפעיל D9.",
+            "difficulty":"קשה.",
+            "date":"21.02.2024",
+            "picture":"../images/event4.jpg"
+        },
+        {
+            "id":"5",
+            "simulationName":"חילוץ טנק מבור",
+            "simulation":" של טנק סימן 4 בבור היקוש.",
+            "location":"עזה.",
+            "afvToRescue":"טנק סימן 4.",
+            "RescueVehicle":"טנק חילוץ,טנק סימן 4.",
+            "participants":"שני צוותי טנק,קצין חילוץ,נהג טנק חילוץ ומפקד טנק חילוץ.",
+            "difficulty":"קל.",
+            "date":"21.02.2024",
+            "picture":"../images/event5.jpg"
+        },
+        {
+            "id":"6",
+            "simulationName":"היפוך D9",
+            "simulation":"היפוך D9.",
+            "location":"בקעת הירדן.",
+            "afvToRescue":"D9.",
+            "RescueVehicle":"D9.",
+            "participants":"מפעיל D9,נהג D9.",
+            "difficulty":"קל.",
+            "date":"21.02.2024",
+            "picture":"../images/event6.jpg"
+        }
+        
+    ]
+}

@@ -1,0 +1,51 @@
+{
+    "category": "simulation",
+    "simulations": [
+        {
+            "id": "0",
+            "title": "חילוץ טנק סימן 2 מעמק",
+            "simulationName": "חילוץ טנק סימן 2 מעמק",
+            "damageTool": "טנק סימן 2",
+            "rescueTools": "טנק חילוץ, טנק סימן 2",
+            "location": "רמת הגולן",
+            "participants": "6 אנשים",
+            "driver": "יגאל אמסלם",
+            "teamMembers": "ארז אלבז, אורי בסל, רחם עזראיל",
+            "commander": "ארז גבאי",
+            "safetyOfficer": "קצין בטיחות: עמית לוי",
+            "difficulty": "קל",
+            "date": "25.02.2024",
+            "video": "https://www.youtube.com/embed/S6bNDqOh7q4"
+        },{
+            "id": "1",
+            "title": "חילוץ טנק סימן 4 הפוך",
+            "simulationName": "חילוץ טנק סימן 4 הפןך",
+            "damageTool": "טנק סימן 4",
+            "rescueTools": "טנק חילוץ, טנק סימן 4",
+            "location": "עזה",
+            "participants": "5 אנשים",
+            "driver": "עומר שפי",
+            "teamMembers": "ניב שריקי, יוני סהלו",
+            "commander": "דוד צריוב",
+            "safetyOfficer": "קצין בטיחות: בר גוניגמן",
+            "difficulty": "קל",
+            "date": "22.02.2024",
+            "video": "https://www.youtube.com/embed/Br8QQEjsQlw?si=8Vt_j7T_RNyJNM8j"
+        },{
+            "id": "2",
+            "title": "היפוך D9",
+            "simulationName": "היפוך D9",
+            "damageTool": "D9",
+            "rescueTools": "טנק חילוץ, D9  ",
+            "location": "ביקעת הירדן",
+            "participants": "6 אנשים",
+            "driver": "יגאל אמסלם",
+            "teamMembers": "ירדן וייס, אוראל בסל, רותם עזריאל",
+            "commander": "סאלי גבאי",
+            "safetyOfficer": "קצין בטיחות: עמית און  ",
+            "difficulty": "קל",
+            "date": "25.02.2024",
+            "video": "https://www.youtube.com/embed/GTwp-vw7eTE?si=LdNUIEpUtS_yccR2"
+        }
+    ]
+}

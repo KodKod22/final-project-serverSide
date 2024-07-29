@@ -1,0 +1,43 @@
+{
+    "categories":[
+        {
+            "category": "categoryMenu",
+            "categoryMenu":
+            [
+                {
+                    "id":"0",
+                    "name":"רק''מים"
+                },
+                {
+                    "id":"1",
+                    "name":"מיקום גאוגרפי"
+                },
+                {
+                    "id":"2",
+                    "name":"רמות קושי"
+                }
+            ]
+        },
+        {
+            "category": "categorySubMenu",
+            "categorySubMenu":[
+                {
+                    "id":"0",
+                    "name":"קל"
+                },
+                {
+                    "id":"1",
+                    "name":"בינוני"
+                },
+                {
+                    "id":"2",
+                    "name":"קשה"
+                }
+            ]
+        }
+        
+    ]
+    
+    
+    
+}
