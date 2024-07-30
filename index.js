@@ -4,6 +4,8 @@ const app = express();
 const port = process.env.PORT || 8081;
 const simulationData = require('./data/simulation.json');
 const { operatorRouter } = require('./routers/operatorRouter.js');
+const { soldierRouter } = require('./routers/soldier_router.js');
+const { simulationFeedbackRouter } = require('./routers/simulationFeedback_router.js');
 
 app.use((req, res, next) => {
     res.set({
@@ -16,12 +18,14 @@ app.use((req, res, next) => {
 });
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+app.use("/client/images",express.static(`${__dirname}/images`));
 app.get("/simulation",(req,res)=>{
     res.json(simulationData);
 });
 
 app.use('/api/post',operatorRouter);
+app.use('/api/soldiers',soldierRouter);
+app.use('/api/simulationFeedback',simulationFeedbackRouter);
 
 app.use((req,res)=>{
     res.status(400).send("Something is broken");
