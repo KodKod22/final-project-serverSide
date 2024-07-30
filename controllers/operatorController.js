@@ -38,7 +38,6 @@ exports.operatorController = {
         const connection = await dbConnection.createConnection();
         const SimulationId = req.body.SimulationId
         const simulationName = req.body.simulationName
-        
         const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
         connection.end();
         if (result.affectedRows === 0) {
@@ -46,8 +45,75 @@ exports.operatorController = {
         } else {
             res.status(200).json({ message: 'Simulation deleted successfully' });
         }
+    },
+    async getSimulationsRecords(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const [rows]= await connection.execute(`select * from tbl_111_simulationRecords`);
+
+        const formattedRows = rows.map(row => {
+            if (row.date && row.date instanceof Date) {
+                row.date = row.date.toISOString().split('T')[0];
+            }
+            return row;
+        });
+
+        res.json(rows);
+        connection.end()
+        return formattedRows;   
+    },
+    async insertSoldierMission(req,res){
+      
+        const soldierId = req.user;
+        const { soldierName,  simulationID} = req.body;
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        
+        const [simulationCheck] = await connection.execute(
+            `SELECT id FROM tbl_111_simulations WHERE id = ?`,
+            [simulationID]
+        );
+
+        if (simulationCheck.length === 0) {
+            res.status(404).json({ error: 'Simulation not found' });
+            await connection.end();
+            return;
+        }
+
+        const [result] = await connection.execute(
+            `INSERT INTO tbl_111_soldierMissions (simulation_id, soldier_id) VALUES (?, ?)`,
+            [simulationID, soldierId]
+        );
+
+        res.status(201).json({ success: true, result });
+        await connection.end();
+    },
+    async updateSimulations(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const {body} = req;
+
+            if (body.simulation) {
+                const [simulationResult] = await connection.execute(
+                    `UPDATE tbl_111_simulations SET simulationName = ? where id = ?`,[body.simulation,body.id]);     
+            }
+            else if (body.AfvToRescue) {
+                const [AfvToRescueResult] = await connection.execute(
+                    `UPDATE tbl_111_simulations SET afvToRescue = ? where id = ?`,[ body.AfvToRescue,body.id]); 
+            }
+            else if (body.RescueVehicle) {
+                const [RescueVehicleResult] = await connection.execute(
+                    `UPDATE tbl_111_simulations SET RescueVehicle = ? where id = ?`,[body.RescueVehicle,body.id]);
+            }else if (body.Participants) {
+                const [ParticipantsResult] = await connection.execute(
+                    `UPDATE tbl_111_simulations SET participants = ? where id = ?`,[body.Participants,body.id]);
+            }else if (body.Location) {
+                const [LocationResult] = await connection.execute(
+                `UPDATE tbl_111_simulations SET location = ? WHERE id = ?`,
+                [body.Location, body.id]);
+            }
+            res.status(200).json({ success: true});
+            await connection.end();
     }
-    /*get simulations records 
-    insert soldier mission
-    update simulation */
+    
 }
