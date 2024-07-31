@@ -17,5 +17,14 @@ exports.soldierController = {
             console.error('Error inserting user:', error);
             res.status(500).send(false);
         }
+    },
+
+    async getRoles(req,res){
+        try {
+            const [rows] = await db.execute('SELECT DISTINCT role FROM tbl_111_soldiers');
+            res.json(rows);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching roles' });
+        }
     }
 }
