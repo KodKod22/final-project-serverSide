@@ -22,10 +22,11 @@ exports.soldierController = {
     async getRoles(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
+        console.log(connection);
         try {
             const [rows]= await connection.execute(`SELECT DISTINCT role FROM tbl_111_soldiers`);
             console.log(rows);
-            res.json(rows);
+            res.json({ products: rows });
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
         }
