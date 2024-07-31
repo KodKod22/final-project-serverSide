@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 8081;
 const simulationData = require('./data/simulation.json');
@@ -16,6 +17,7 @@ app.use((req, res, next) => {
     });
     next();
 });
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use("/client/images",express.static(`${__dirname}/images`));
