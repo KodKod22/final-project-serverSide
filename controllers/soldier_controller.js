@@ -24,6 +24,7 @@ exports.soldierController = {
         const connection = await dbConnection.createConnection();
         try {
             const [rows]= await connection.execute(`SELECT DISTINCT role FROM tbl_111_soldiers`);
+            console.log(rows);
             res.json(rows);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
