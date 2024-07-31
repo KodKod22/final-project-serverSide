@@ -16,21 +16,36 @@ exports.operatorController = {
         
         return formattedRows; 
     },
-    async getUser(req,res) {
-        const {dbConnection} = require('../dbConnection');
-        const connection = await dbConnection.createConnection();
-        const userName = req.body.name;
-        const userPassword = req.body.password;
-        const [rows] = await connection.execute(
-            'SELECT * FROM tbl_111_usersType WHERE user_name = ? AND user_password = ?',
-            [userName, userPassword]
-        );
-
-        if (rows.length === 0) {
-            res.status(401).json({ error: 'Invalid username or password' });
-        } else {
+    async getUser(req, res) {
+        try {
+            const { dbConnection } = require('../dbConnection')
+            const connection = await dbConnection.createConnection();
+            const userName = req.body.name;
+            const userPassword = req.body.password;
+    
+            console.log('Request body:', req.body); // Log the request body
+            console.log('userName:', userName); // Log userName
+            console.log('userPassword:', userPassword); // Log userPassword
+    
+            if (!userName || !userPassword) {
+                return res.status(400).json({ error: 'Missing username or password' });
+            }
+    
+            const [rows] = await connection.execute(
+                'SELECT * FROM tbl_111_usersType WHERE user_name = ? AND user_password = ?',
+                [userName, userPassword]
+            );
+    
+            if (rows.length === 0) {
+                res.status(401).json({ error: 'Invalid username or password' });
+            } else {
+                res.json(rows[0]);
+            }
+    
             connection.end();
-            res.json(rows[0]);
+        } catch (error) {
+            console.error('Error in getUser:', error); // Log any error
+            res.status(500).json({ error: 'Internal server error' });
         }
     },
     async deleteSimulations(req,res) {
