@@ -1,7 +1,7 @@
-const express = require('express');
+const {Router} = require('express');
 const fs = require('fs');
 const path = require('path');
-const router = express.Router();
+const router = new Router();
 
 router.get('/users', (req, res) => {
     const filePath = path.join(__dirname, '../data/user.json');
