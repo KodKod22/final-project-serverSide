@@ -58,7 +58,10 @@ exports.operatorController = {
         const connection = await dbConnection.createConnection();
         const [rows] = await connection.execute(`
             SELECT 
-	            sim.id,
+                sim.id,
+                sim.simulationID,
+                sim.date,
+                sim.video,
                 sir.simulationName,
                 sir.location,
                 sir.afvToRescue,
@@ -69,24 +72,23 @@ exports.operatorController = {
                 s3.name AS SafetyOfficerName,
                 s4.name AS TeamMember1Name,
                 s5.name AS TeamMember2Name,
-                s6.name AS TeamMember3Name,
-                sim.date
+                s6.name AS TeamMember3Name
             FROM 
                 tbl_111_simulationRecords sim
+            INNER JOIN 
+                tbl_111_simulations sir ON sir.id = sim.simulationID
             INNER JOIN 
                 tbl_111_soldiers s1 ON sim.commanderID = s1.soldierID
             INNER JOIN 
                 tbl_111_soldiers s2 ON sim.driverID = s2.soldierID
             INNER JOIN 
                 tbl_111_soldiers s3 ON sim.safetyOfficerID = s3.soldierID
-            inner JOIN 
+            LEFT JOIN 
                 tbl_111_soldiers s4 ON sim.teamMember1ID = s4.soldierID
-            inner JOIN 
+            LEFT JOIN 
                 tbl_111_soldiers s5 ON sim.teamMember2ID = s5.soldierID
-            inner JOIN 
-                tbl_111_soldiers s6 ON sim.teamMember3ID = s6.soldierID
-            inner join 
-                tbl_111_simulations sir on sim.id = sir.id`);
+            LEFT JOIN 
+                tbl_111_soldiers s6 ON sim.teamMember3ID = s6.soldierID`);
         const formattedRows = rows.map(row => {
             if (row.date && row.date instanceof Date) {
                 row.date = row.date.toISOString().split('T')[0];
