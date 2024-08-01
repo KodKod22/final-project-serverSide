@@ -10,12 +10,6 @@ const { operatorRouter } = require('./routers/operatorRouter.js');
 const { soldierRouter } = require('./routers/soldier_router.js');
 const { simulationFeedbackRouter } = require('./routers/simulationFeedback_router.js');
 
-app.get("/simulation",(req,res)=>{
-    res.json(simulationData);
-});
-app.get("/categories", (req, res) => { 
-    res.json(categoryData);
-});
 app.use((req, res, next) => {
     res.set({
     'Access-Control-Allow-Origin': '*',
@@ -25,6 +19,7 @@ app.use((req, res, next) => {
     });
     next();
 });
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
@@ -34,7 +29,12 @@ app.use('/client/images', express.static(`${__dirname}/images`));
 app.use('/api/post',operatorRouter);
 app.use('/api/soldiers',soldierRouter);
 app.use('/api/simulationFeedback',simulationFeedbackRouter);
-
+app.get("/simulation",(req,res)=>{
+    res.json(simulationData);
+});
+app.get("/categories", (req, res) => { 
+    res.json(categoryData);
+});
 app.use((req,res)=>{
     res.status(400).send("Something is broken");
 });
