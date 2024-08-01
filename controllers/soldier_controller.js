@@ -31,6 +31,7 @@ exports.soldierController = {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const { body } = req;
+        console.log(`delete id ${body['soldier_id']}`)
         try {
             const rows = await connection.execute(`DELETE FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
             res.status(201).json({ success: true , operation: 'delete', id: body['soldier_id']});
