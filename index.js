@@ -10,7 +10,7 @@ const categoryData = require('./data/categories.json');
 const { operatorRouter } = require('./routers/operatorRouter.js');
 const { soldierRouter } = require('./routers/soldier_router.js');
 const { simulationFeedbackRouter } = require('./routers/simulationFeedback_router.js');
-const userRouter = require('./routers/userRouter');
+const {userRouter} = require('./routers/userRouter');
 const {appRouter}=require('./routers/appRouter');
 
 
