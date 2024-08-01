@@ -33,10 +33,13 @@ exports.soldierController = {
         const { body } = req;
         console.log(`delete id ${body['soldier_id']}`)
         try {
+            const [simRows] = await connection.execute(`DELETE FROM tbl_111_simulationFeedback WHERE soldierID = ?;`, [body['soldier_id']]);
             const [rows] = await connection.execute(`DELETE FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
-            console.log("rows")
-            console.log(rows)
-            res.status(201).json({ success: true , operation: 'delete', id: body['soldier_id']});
+            if(rows['affectedRows'] === 1)
+                res.status(201).json({ success: true , operation: 'delete', id: body['soldier_id']});
+            else
+                res.status(201).json({ success: false , operation: 'delete', id: body['soldier_id'] , message: 'soldier is required to complete his tasks'});
+            
         } catch (error) {
             console.log(error)
             res.status(500).json({ message: `Error deleting soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
