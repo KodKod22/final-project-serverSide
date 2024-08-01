@@ -17,7 +17,16 @@ exports.soldierController = {
             res.status(500).send(false);
         }
     },
-
+    async getSoldiers(req, res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        try {
+            const [rows] = await connection.execute(`SELECT * FROM tbl_111_soldiers;`);
+            res.status(200).json(rows);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching roles' });
+        }
+    },
     async getRoles(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
