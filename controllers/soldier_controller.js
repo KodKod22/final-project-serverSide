@@ -33,6 +33,7 @@ exports.soldierController = {
         const { body } = req;
         console.log(`delete id ${body['soldier_id']}`)
         try {
+            const [missionsRows] = await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE soldier_id = ?;`, [body['soldier_id']]);
             const [simRows] = await connection.execute(`DELETE FROM tbl_111_simulationFeedback WHERE soldierID = ?;`, [body['soldier_id']]);
             const [rows] = await connection.execute(`DELETE FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
             if(rows['affectedRows'] === 1)
