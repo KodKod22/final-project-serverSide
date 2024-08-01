@@ -31,7 +31,6 @@ exports.soldierController = {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const { body } = req;
-        console.log(`delete id ${body['soldier_id']}`)
         try {
             const [missionsRows] = await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE soldier_id = ?;`, [body['soldier_id']]);
             const [simRows] = await connection.execute(`DELETE FROM tbl_111_simulationFeedback WHERE soldierID = ?;`, [body['soldier_id']]);
@@ -54,6 +53,17 @@ exports.soldierController = {
             res.status(201).json(rows);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
+        }
+    },
+    async getSoldiersProfile(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const { body } = req;
+        try{
+            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
+            res.status(201).json(row);
+        }catch(error){
+            res.status(500).json({ message: `Error fetching soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
         }
     }
 }
