@@ -23,7 +23,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/client/images', express.static(`${__dirname}/images`));
-app.use(express.static(path.join(__dirname, 'client')));
+app.use('/server', express.static(`${__dirname}/data`));
 app.get("/simulation",(req,res)=>{
     res.json(simulationData);
 });
