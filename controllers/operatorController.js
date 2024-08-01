@@ -32,7 +32,7 @@ exports.operatorController = {
             connection.end();
             res.json(rows[0]);
         }
-        return rows;
+        return rows[0];
     },
     async deleteSimulations(req,res) {
         const {dbConnection} = require('../dbConnection');
