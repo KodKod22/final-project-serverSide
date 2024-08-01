@@ -16,21 +16,28 @@ exports.operatorController = {
         
         return formattedRows; 
     },
-    async getUser(req,res) {
-        const {dbConnection} = require('../dbConnection');
+    async getUser(req, res) {
+        const { dbConnection } = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const userName = req.body.name;
         const userPassword = req.body.password;
-        const [rows] = await connection.execute(
-            'SELECT * FROM tbl_111_usersType WHERE user_name = ? AND user_password = ?',
-            [userName, userPassword]
-        );
-
-        if (rows.length === 0) {
-            res.status(401).json({ error: 'Invalid username or password' });
-        } else {
+    
+        try {
+            const [rows] = await connection.execute(
+                'SELECT * FROM tbl_111_usersType WHERE user_name = ? AND user_password = ?',
+                [userName, userPassword]
+            );
+    
             connection.end();
-            res.json(rows[0]);
+    
+            if (rows.length === 0) {
+                return res.status(401).json({ error: 'Invalid username or password' });
+            } else {
+                return res.json(rows[0]);
+            }
+        } catch (error) {
+            console.error('Database error:', error);
+            return res.status(500).json({ error: 'Internal Server Error' });
         }
     },
     async deleteSimulations(req,res) {
@@ -45,12 +52,43 @@ exports.operatorController = {
         } else {
             res.status(200).json({ message: 'Simulation deleted successfully' });
         }
-    },
+    }, 
     async getSimulationsRecords(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        const [rows]= await connection.execute(`select * from tbl_111_simulationRecords`);
-
+        const [rows] = await connection.execute(`
+            SELECT 
+                sim.id,
+                sim.simulationID,
+                sim.date,
+                sim.video,
+                sir.simulationName,
+                sir.location,
+                sir.afvToRescue,
+                sir.RescueVehicle,
+                sir.difficulty,
+                s1.name AS CommanderName,
+                s2.name AS DriverName,
+                s3.name AS SafetyOfficerName,
+                s4.name AS TeamMember1Name,
+                s5.name AS TeamMember2Name,
+                s6.name AS TeamMember3Name
+            FROM 
+                tbl_111_simulationRecords sim
+            INNER JOIN 
+                tbl_111_simulations sir ON sir.id = sim.simulationID
+            INNER JOIN 
+                tbl_111_soldiers s1 ON sim.commanderID = s1.soldierID
+            INNER JOIN 
+                tbl_111_soldiers s2 ON sim.driverID = s2.soldierID
+            INNER JOIN 
+                tbl_111_soldiers s3 ON sim.safetyOfficerID = s3.soldierID
+            LEFT JOIN 
+                tbl_111_soldiers s4 ON sim.teamMember1ID = s4.soldierID
+            LEFT JOIN 
+                tbl_111_soldiers s5 ON sim.teamMember2ID = s5.soldierID
+            LEFT JOIN 
+                tbl_111_soldiers s6 ON sim.teamMember3ID = s6.soldierID`);
         const formattedRows = rows.map(row => {
             if (row.date && row.date instanceof Date) {
                 row.date = row.date.toISOString().split('T')[0];
