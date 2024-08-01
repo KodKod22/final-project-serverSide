@@ -33,7 +33,9 @@ exports.soldierController = {
         const { body } = req;
         console.log(`delete id ${body['soldier_id']}`)
         try {
-            const rows = await connection.execute(`DELETE FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
+            const [rows] = await connection.execute(`DELETE FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
+            console.log("rows")
+            console.log(rows)
             res.status(201).json({ success: true , operation: 'delete', id: body['soldier_id']});
         } catch (error) {
             res.status(500).json({ message: `Error deleting soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
