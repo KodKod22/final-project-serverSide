@@ -7,6 +7,6 @@ soldierRouter.post('/deleteSoldier', soldierController.deleteSoldier);
 soldierRouter.get('/getRoles', soldierController.getRoles);
 soldierRouter.get('/getSoldiers', soldierController.getSoldiers);
 soldierRouter.get('/getSoldiersProfile', soldierController.getSoldiersProfile);
-
+soldierRouter.get('/SimulationsRecords',soldierController.getSimulationsRecords);
 
 module.exports = {soldierRouter};

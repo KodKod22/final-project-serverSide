@@ -52,7 +52,7 @@ exports.operatorController = {
         } else {
             res.status(200).json({ message: 'Simulation deleted successfully' });
         }
-    },
+    }, 
     async getSimulationsRecords(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
