@@ -36,7 +36,7 @@ app.use((req,res)=>{
     res.status(400).send("Something is broken");
 });
 app.get("/categories", (req, res) => { 
-    res.sendFile(`${__dirname}/data/categories.json`);
+    res.json(`${__dirname}/data/categories.json`);
 });
 
 app.listen(port);
