@@ -7,6 +7,7 @@ operatorRouter.post('/addMission',authMiddleware.getSoldierID,operatorController
 operatorRouter.get('/SimulationsRecords',operatorController.getSimulationsRecords);
 operatorRouter.get('/Simulations',operatorController.getSimulations);
 operatorRouter.post('/user',operatorController.getUser);
+operatorRouter.get('/Simulation',operatorController.getSimulation)
 operatorRouter.delete('/deleteSimulations',operatorController.deleteSimulations);
 operatorRouter.put('/updateSimulation', operatorController.updateSimulations);
 

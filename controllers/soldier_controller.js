@@ -39,7 +39,6 @@ exports.soldierController = {
                 res.status(201).json({ success: true , operation: 'delete', id: body['soldier_id']});
             else
                 res.status(201).json({ success: false , operation: 'delete', id: body['soldier_id'] , message: 'soldier is required to complete his tasks'});
-            
         } catch (error) {
             console.log(error)
             res.status(500).json({ message: `Error deleting soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
