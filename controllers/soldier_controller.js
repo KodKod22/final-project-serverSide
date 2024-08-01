@@ -5,7 +5,6 @@ exports.soldierController = {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const { body } = req;
-        console.log(body)
         try {
             const [result] = await connection.execute(
                 `INSERT INTO tbl_111_soldiers(soldierID, name, role, rank, yearsInTheUnits, riflery, dateOfBirth, s_img) 
@@ -18,15 +17,22 @@ exports.soldierController = {
             res.status(500).send(false);
         }
     },
-
+    async getSoldiers(req, res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        try {
+            const [rows] = await connection.execute(`SELECT * FROM tbl_111_soldiers;`);
+            res.status(200).json(rows);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching roles' });
+        }
+    },
     async getRoles(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        console.log(connection);
         try {
-            const [rows]= await connection.execute(`SELECT DISTINCT role FROM tbl_111_soldiers`);
-            console.log(rows);
-            res.json({ products: rows });
+            const [rows] = await connection.execute(`SELECT DISTINCT role FROM tbl_111_soldiers`);
+            res.status(200).json(rows);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
         }
