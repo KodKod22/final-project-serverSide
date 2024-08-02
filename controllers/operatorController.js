@@ -45,6 +45,11 @@ exports.operatorController = {
         const connection = await dbConnection.createConnection();
         const SimulationId = req.body.SimulationId
         const simulationName = req.body.simulationName
+
+        const [checkMission] = await connection.execute(`select simulation_id from tbl_111_soldierMissions where simulation_id = ?`,SimulationId);
+        if (checkMission.affectedRows != 0) {
+            await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE simulation_id=? `,[SimulationId]);
+        }
         const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
         connection.end();
         if (result.affectedRows === 0) {
