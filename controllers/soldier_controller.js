@@ -64,17 +64,6 @@ exports.soldierController = {
             res.status(500).json({ message: 'Error fetching roles' });
         }
     },
-    async getSoldiersProfile(req,res){
-        const {dbConnection} = require('../dbConnection');
-        const connection = await dbConnection.createConnection();
-        const { body } = req;
-        try{
-            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
-            res.status(201).json(row);
-        }catch(error){
-            res.status(500).json({ message: `Error fetching soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
-        }
-    },
     async getSimulationsRecords(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
@@ -96,35 +85,81 @@ exports.soldierController = {
                     s4.name AS TeamMember1Name,
                     s5.name AS TeamMember2Name,
                     s6.name AS TeamMember3Name
-                FROM 
+                    FROM 
                     tbl_111_simulationRecords sim
-                INNER JOIN 
+                    INNER JOIN 
                     tbl_111_simulations sir ON sir.id = sim.simulationID
-                INNER JOIN 
+                    INNER JOIN 
                     tbl_111_soldiers s1 ON sim.commanderID = s1.soldierID
-                INNER JOIN 
+                    INNER JOIN 
                     tbl_111_soldiers s2 ON sim.driverID = s2.soldierID
-                INNER JOIN 
+                    INNER JOIN 
                     tbl_111_soldiers s3 ON sim.safetyOfficerID = s3.soldierID
-                LEFT JOIN 
+                    LEFT JOIN 
                     tbl_111_soldiers s4 ON sim.teamMember1ID = s4.soldierID
-                LEFT JOIN 
+                    LEFT JOIN 
                     tbl_111_soldiers s5 ON sim.teamMember2ID = s5.soldierID
-                LEFT JOIN 
+                    LEFT JOIN 
                     tbl_111_soldiers s6 ON sim.teamMember3ID = s6.soldierID`);
-            const formattedRows = rows.map(row => {
-                if (row.date && row.date instanceof Date) {
-                    row.date = row.date.toISOString().split('T')[0];
-                }
-                return row;
-            });
-    
+                    const formattedRows = rows.map(row => {
+                        if (row.date && row.date instanceof Date) {
+                            row.date = row.date.toISOString().split('T')[0];
+                        }
+                        return row;
+                    });
+                    
             res.status(201).json(rows);
             connection.end()
             return formattedRows;   
-
+            
         }catch (error) {
             res.status(500).json({ message: 'Error fetching records' });
+        }
+    },
+    async getSimulations(req,res) {
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const [rows]= await connection.execute(`select * from tbl_111_simulations`);
+
+        const formattedRows = rows.map(row => {
+            if (row.date && row.date instanceof Date) {
+                row.date = row.date.toISOString().split('T')[0];
+            }
+            return row;
+        });
+
+        res.json(rows);
+        connection.end()
+        
+        return formattedRows; 
+    },
+    async getSimulation(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const {body} = req;
+        const [rows]= await connection.execute(`select * from tbl_111_simulations where id = ?`,[body.simulationId]);
+
+        const formattedRows = rows.map(row => {
+            if (row.date && row.date instanceof Date) {
+                row.date = row.date.toISOString().split('T')[0];
+            }
+            return row;
+        });
+
+        res.json(rows);
+        connection.end()
+        
+        return formattedRows; 
+    },
+    async getSoldiersProfile(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const { body } = req;
+        try{
+            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
+            res.status(201).json(row);
+        }catch(error){
+            res.status(500).json({ message: `Error fetching soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
         }
     }
 }

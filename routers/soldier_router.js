@@ -9,5 +9,7 @@ soldierRouter.get('/getSoldiers', soldierController.getSoldiers);
 soldierRouter.get('/getSoldiersProfile', soldierController.getSoldiersProfile);
 soldierRouter.get('/SimulationsRecords',soldierController.getSimulationsRecords);
 soldierRouter.get('/getAFVs', soldierController.getAFVs);
+soldierRouter.get('/getAllSimulations', soldierController.getSimulations);
+soldierRouter.get('/getOneSimulation', soldierController.getSimulation);
 
 module.exports = {soldierRouter};
