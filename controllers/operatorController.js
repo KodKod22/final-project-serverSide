@@ -102,11 +102,13 @@ exports.operatorController = {
     },
     async insertSoldierMission(req,res){
       
-        const soldierId = req.user;
         const { soldierName,  simulationID} = req.body;
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        
+        const [soldierIdCheck] = await connection.execute(
+            `SELECT soldierID FROM tbl_111_soldiers WHERE name = ?`,
+            [soldierName]
+        );
         const [simulationCheck] = await connection.execute(
             `SELECT id FROM tbl_111_simulations WHERE id = ?`,
             [simulationID]
@@ -118,9 +120,18 @@ exports.operatorController = {
             return;
         }
 
+        if (soldierIdCheck.length === 0) {
+            res.status(404).json({ error: 'Soldier not found' });
+            await connection.end();
+            return;
+        } 
+        const simulationId = simulationCheck[0].id;
+        const soldierId = soldierIdCheck[0].soldierID;
+
+        
         const [result] = await connection.execute(
             `INSERT INTO tbl_111_soldierMissions (simulation_id, soldier_id) VALUES (?, ?)`,
-            [simulationID, soldierId]
+            [simulationId, soldierId]
         );
 
         res.status(201).json({ success: true, result });
