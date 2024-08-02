@@ -12,7 +12,7 @@
             "extractorVehicles":"טנק חילוץ, טנק סימן 4",
             "difficulty":"קל",
             "location":"עזה",
-            "pic":"../images/commander.png",
+            "pic":"./images/commander.png",
             "backStory": "מחלקת טנקים אשר בנויה משני טנקים, אחד טנק מפקד מחלקה והשני טנק מפקד, נסעו במהלך המלחמה בלילה לתוך סמטה. במהלך הנסיעה נהג טנק מפקד מחלקה לא ראה את תנאי השטח והפיל את הטנק לתוך הבור שנוצר בגלל הפצצות חיל האוויר."
         },
         {
@@ -20,7 +20,7 @@
             "Topic": "יצירת אירוע לחייל חדש",
             "sender": "יצחק שדה",
             "date": "תאריך: 21/02/2024",
-            "pic":"../images/commander.png",
+            "pic":"./images/commander.png",
             "content":""
         },
         {
@@ -28,7 +28,7 @@
             "Topic":"עדכון אירוע: חילוץ טנק סימן 4",
             "sender":"שמעון בוחבוט",
             "date":"תאריך: 20/02/2024",
-            "pic":"../images/commander.png",
+            "pic":"./images/commander.png",
             "content":""
         },
         {
@@ -36,7 +36,7 @@
             "Topic":"עדכון אירוע: חילוץ D9",
             "sender":"יצחק שדה",
             "date":"תאריך: 19/02/2024",
-            "pic":"../images/commander.png",
+            "pic":"./images/commander.png",
             "content":""
         },
         {
@@ -44,7 +44,7 @@
             "Topic":"יצירת אירוע לחייל חדש",
             "sender":"יצחק שדה",
             "date":"תאריך: 21/02/2024",
-            "pic":"../images/commander.png",
+            "pic":"./images/commander.png",
             "content":""
         }
     ]
