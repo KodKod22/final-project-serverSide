@@ -10,8 +10,8 @@ const categoryData = require('./data/categories.json');
 const { operatorRouter } = require('./routers/operatorRouter.js');
 const { soldierRouter } = require('./routers/soldier_router.js');
 const { simulationFeedbackRouter } = require('./routers/simulationFeedback_router.js');
-const {userRouter} = require('./routers/userRouter');
-const {appRouter}=require('./routers/appRouter');
+//const {userRouter} = require('./routers/userRouter.js');
+const {appRouter}=require('./routers/appRouter.js');
 
 
 app.use((req, res, next) => {
@@ -34,7 +34,7 @@ app.use('/client/images', express.static(`${__dirname}/images`));
 app.use('/api/post',operatorRouter);
 app.use('/api/soldiers',soldierRouter);
 app.use('/api/simulationFeedback',simulationFeedbackRouter);
-app.use('/api', userRouter);
+//app.use('/api', userRouter);
 app.use('/api/app',appRouter)
 app.get("/simulation",(req,res)=>{
     res.json(simulationData);
