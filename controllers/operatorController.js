@@ -49,9 +49,13 @@ exports.operatorController = {
         const [checkMission] = await connection.execute(`select simulation_id from tbl_111_soldierMissions where simulation_id = ?`,SimulationId);
         if (checkMission.affectedRows != 0) {
             await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE simulation_id=? `,[SimulationId]);
+            const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
+            connection.end();
+        }else{
+            const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
+            connection.end();
         }
-        const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
-        connection.end();
+       
         if (result.affectedRows === 0) {
             res.status(404).json({ message: 'Simulation not found' });
         } else {
