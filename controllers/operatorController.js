@@ -43,8 +43,8 @@ exports.operatorController = {
     async deleteSimulations(req,res) {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        const SimulationId = req.body.SimulationId
-        const simulationName = req.body.simulationName
+        const [SimulationId] = req.body.SimulationId
+        const [simulationName] = req.body.simulationName
 
         const [checkMission] = await connection.execute(`select simulation_id from tbl_111_soldierMissions where simulation_id = ?`,SimulationId);
         if (checkMission.affectedRows != 0) {
