@@ -1,9 +1,9 @@
 const {Router} = require('express');
-const fs = require('fs');
-const path = require('path');
+//const fs = require('fs');
+//const path = require('path');
 const router = new Router();
 
-router.get('/users', (req, res) => {
+/*router.get('/users', (req, res) => {
     const filePath = path.join(__dirname, '../data/user.json');
     fs.readFile(filePath, 'utf8', (err, data) => {
         if (err) {
@@ -13,6 +13,6 @@ router.get('/users', (req, res) => {
         }
         res.json(JSON.parse(data));
     });
-});
+});*/
 
 module.exports = {router};
