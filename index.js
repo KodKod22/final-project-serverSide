@@ -7,6 +7,7 @@ const port = process.env.PORT || 8081;
 const simulationData = require('./data/simulation.json');
 
 const categoryData = require('./data/categories.json');
+const requestData = require('./data/requests.json');
 const { operatorRouter } = require('./routers/operatorRouter.js');
 const { soldierRouter } = require('./routers/soldier_router.js');
 const { simulationFeedbackRouter } = require('./routers/simulationFeedback_router.js');
@@ -41,6 +42,9 @@ app.get("/simulation",(req,res)=>{
 });
 app.get("/categories", (req, res) => { 
     res.json(categoryData);
+});
+app.get("/requests", (req, res) => { 
+    res.json(requestData);
 });
 app.use((req,res)=>{
     res.status(400).send("Something is broken");
