@@ -15,7 +15,7 @@ const { simulationFeedbackRouter } = require('./routers/simulationFeedback_route
 const {appRouter}=require('./routers/appRouter.js');
 
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.set({
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
         'Content-Type': 'application/json'
     });
     next();
-});
+});*/
 
 
 app.use(cors());
