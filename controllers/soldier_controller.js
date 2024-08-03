@@ -154,7 +154,8 @@ exports.soldierController = {
         const connection = await dbConnection.createConnection();
         const {id} = req.params;
         try{
-            const [rows]= await connection.execute(`select * from tbl_111_simulationRecords where id = ?`,[id]);
+            const [rows]= await connection.execute(`select * from tbl_111_simulationRecords inner join
+               tbl_111_simulations on id = ?`,[id]);
             res.status(201).json(rows);
         }catch(error){
             res.status(500).json({ message: `Error fetching simulation id:${id}`, _id: id });
