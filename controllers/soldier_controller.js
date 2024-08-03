@@ -1,5 +1,4 @@
 
-
 exports.soldierController = {
     async addSoldier(req, res) {
         const {dbConnection} = require('../dbConnection');
@@ -59,6 +58,23 @@ exports.soldierController = {
         const connection = await dbConnection.createConnection();
         try {
             const [rows] = await connection.execute(`SELECT DISTINCT afvToRescue FROM tbl_111_simulations`);
+            res.status(201).json(rows);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching roles' });
+        }
+    },
+    async getDifficulty(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        try {
+            const [rows] = await connection.execute(`
+                SELECT 
+                    sim.simulationID,
+                    sir.difficulty
+                    FROM 
+                    tbl_111_simulationRecords sim
+                    INNER JOIN 
+                    tbl_111_simulations sir ON sir.id = sim.simulationID`);
             res.status(201).json(rows);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
@@ -133,7 +149,21 @@ exports.soldierController = {
         
         return formattedRows; 
     },
-    async getSimulation(req,res){
+    async getSimulationRecord(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const {id} = req.params;
+        try{
+            const [rows]= await connection.execute(`select * from tbl_111_simulationRecords inner join
+               tbl_111_simulations on tbl_111_simulations.id = tbl_111_simulationRecords.simulationID 
+               where tbl_111_simulationRecords.id= ?`,[id]);
+            res.status(201).json(rows);
+        }catch(error){
+            res.status(500).json({ message: `Error fetching simulation id:${id}`, _id: id });
+        }
+      
+    },
+    async getSimulationSoldierID(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const {body} = req;
@@ -154,12 +184,18 @@ exports.soldierController = {
     async getSoldiersProfile(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        const { body } = req;
+        const { soldierId } = req.params;
         try{
-            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
+            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers INNER JOIN 
+                tbl_111_simulationRecords on tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember1ID 
+                OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember2ID OR tbl_111_soldiers.soldierID
+                 = tbl_111_simulationRecords.teamMember3ID OR  tbl_111_soldiers.soldierID = 
+                tbl_111_simulationRecords.driverID OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.commanderID 
+                OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.safetyOfficerID INNER JOIN tbl_111_simulations 
+                ON tbl_111_simulationRecords.simulationID = tbl_111_simulations.id WHERE tbl_111_soldiers.soldierID = ?`, [soldierId]);
             res.status(201).json(row);
         }catch(error){
-            res.status(500).json({ message: `Error fetching soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
+            res.status(500).json({ message: `Error fetching soldier id:${soldierId}`, id: soldierId });
         }
     }
 }

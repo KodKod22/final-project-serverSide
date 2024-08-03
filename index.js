@@ -1,19 +1,18 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
-const path = require('path');
 const app = express();
+const cors = require('cors');
 const port = process.env.PORT || 8081;
-const simulationData = require('./data/simulation.json');
+
 
 const categoryData = require('./data/categories.json');
 const requestData = require('./data/requests.json');
 const { operatorRouter } = require('./routers/operatorRouter.js');
 const { soldierRouter } = require('./routers/soldier_router.js');
 const { simulationFeedbackRouter } = require('./routers/simulationFeedback_router.js');
-//const {userRouter} = require('./routers/userRouter.js');
+const {userRouter} = require('./routers/userRouter.js');
 const {appRouter} = require('./routers/appRouter.js');
-
+app.use(cors())
 app.use((req, res, next) => {
     res.set({
         'Access-Control-Allow-Origin': '*',
@@ -32,11 +31,11 @@ app.use('/client/images', express.static(`${__dirname}/images`));
 app.use('/api/post',operatorRouter);
 app.use('/api/soldiers',soldierRouter);
 app.use('/api/simulationFeedback',simulationFeedbackRouter);
-//app.use('/api', userRouter);
-app.use('/api/app',appRouter);
-app.get("/simulation",(req,res)=>{
-    res.json(simulationData);
-});
+
+app.use('/api/users', userRouter);
+app.use('/api/app',appRouter)
+
+
 app.get("/categories", (req, res) => { 
     res.json(categoryData);
 });
