@@ -166,7 +166,7 @@ exports.soldierController = {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const {body} = req;
-        const [rows]= await connection.execute(`select * from tbl_111_simulations where id = ?`,[body.simulationId]);
+        const [rows]= await connection.execute(`select * from tbl_111_simulationRecords where id = ?`,[body.simulationId]);
 
         const formattedRows = rows.map(row => {
             if (row.date && row.date instanceof Date) {
