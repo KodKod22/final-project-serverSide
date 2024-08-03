@@ -31,8 +31,10 @@ app.use('/client/images', express.static(`${__dirname}/images`));
 app.use('/api/post',operatorRouter);
 app.use('/api/soldiers',soldierRouter);
 app.use('/api/simulationFeedback',simulationFeedbackRouter);
+
 app.use('/api/users', userRouter);
 app.use('/api/app',appRouter)
+
 
 app.get("/categories", (req, res) => { 
     res.json(categoryData);
