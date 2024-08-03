@@ -203,12 +203,13 @@ exports.soldierController = {
         const connection = await dbConnection.createConnection();
         const { soldierId } = req.params;
         try{
-            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers INNER JOIN
-                tbl_111_simulationRecords on tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember1ID OR  
-                tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember2ID OR  tbl_111_soldiers.soldierID = 
-                tbl_111_simulationRecords.teamMember3ID OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.driverID OR 
-                tbl_111_soldiers.soldierID = tbl_111_simulationRecords.commanderID OR  tbl_111_soldiers.soldierID = 
-                tbl_111_simulationRecords.safetyOfficerID WHERE tbl_111_soldiers.soldierID = ?`, [soldierId]);
+            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers INNER JOIN 
+                tbl_111_simulationRecords on tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember1ID 
+                OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember2ID OR tbl_111_soldiers.soldierID
+                 = tbl_111_simulationRecords.teamMember3ID OR  tbl_111_soldiers.soldierID = 
+                tbl_111_simulationRecords.driverID OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.commanderID 
+                OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.safetyOfficerID INNER JOIN tbl_111_simulations 
+                ON tbl_111_simulationRecords.simulationID = tbl_111_simulations.id WHERE tbl_111_soldiers.soldierID = ?`, [soldierId]);
             res.status(201).json(row);
         }catch(error){
             res.status(500).json({ message: `Error fetching soldier id:${soldierId}`, id: soldierId });
