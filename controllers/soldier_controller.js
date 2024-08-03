@@ -187,7 +187,7 @@ exports.soldierController = {
             LEFT JOIN 
                 tbl_111_soldiers s6 ON tbl_111_simulationRecords.teamMember3ID = s6.soldierID
             WHERE 
-                tbl_111_simulationRecords.id = 2;`,[id]);
+                tbl_111_simulationRecords.id = `,[id]);
                         res.status(201).json(rows);
         }catch(error){
             res.status(500).json({ message: `Error fetching simulation id:${id}`, _id: id });
