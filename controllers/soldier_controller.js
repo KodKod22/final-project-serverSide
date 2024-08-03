@@ -63,11 +63,31 @@ exports.soldierController = {
             res.status(500).json({ message: 'Error fetching roles' });
         }
     },
-    async getDifficultys(req,res){
+    async getDifficulty(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         try {
-            const [rows] = await connection.execute(`SELECT DISTINCT difficulty FROM tbl_111_simulations`);
+            const [rows] = await connection.execute(`
+                SELECT 
+                    sim.id,
+                    sim.simulationID,
+                    sim.date,
+                    sim.video,
+                    sir.simulationName,
+                    sir.location,
+                    sir.afvToRescue,
+                    sir.RescueVehicle,
+                    sir.difficulty,
+                    s1.name AS CommanderName,
+                    s2.name AS DriverName,
+                    s3.name AS SafetyOfficerName,
+                    s4.name AS TeamMember1Name,
+                    s5.name AS TeamMember2Name,
+                    s6.name AS TeamMember3Name
+                    FROM 
+                    tbl_111_simulationRecords sim
+                    INNER JOIN 
+                    tbl_111_simulations sir ON sir.id = sim.simulationID `);
             res.status(201).json(rows);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
@@ -163,12 +183,12 @@ exports.soldierController = {
     async getSoldiersProfile(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        const { body } = req;
+        const { soldierId } = req.params;
         try{
-            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers WHERE soldierID = ?;`, [body['soldier_id']]);
+            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers WHERE soldierID = ?;`, [soldierId]);
             res.status(201).json(row);
         }catch(error){
-            res.status(500).json({ message: `Error fetching soldier id:${body['soldier_id']}`, id: body['soldier_id'] });
+            res.status(500).json({ message: `Error fetching soldier id:${soldierId}`, id: soldierId });
         }
     }
 }
