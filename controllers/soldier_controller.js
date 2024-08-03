@@ -69,25 +69,12 @@ exports.soldierController = {
         try {
             const [rows] = await connection.execute(`
                 SELECT 
-                    sim.id,
                     sim.simulationID,
-                    sim.date,
-                    sim.video,
-                    sir.simulationName,
-                    sir.location,
-                    sir.afvToRescue,
-                    sir.RescueVehicle,
-                    sir.difficulty,
-                    s1.name AS CommanderName,
-                    s2.name AS DriverName,
-                    s3.name AS SafetyOfficerName,
-                    s4.name AS TeamMember1Name,
-                    s5.name AS TeamMember2Name,
-                    s6.name AS TeamMember3Name
+                    sir.difficulty
                     FROM 
                     tbl_111_simulationRecords sim
                     INNER JOIN 
-                    tbl_111_simulations sir ON sir.id = sim.simulationID `);
+                    tbl_111_simulations sir ON sir.id = sim.simulationID`);
             res.status(201).json(rows);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
