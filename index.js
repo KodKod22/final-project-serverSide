@@ -12,10 +12,9 @@ const { operatorRouter } = require('./routers/operatorRouter.js');
 const { soldierRouter } = require('./routers/soldier_router.js');
 const { simulationFeedbackRouter } = require('./routers/simulationFeedback_router.js');
 //const {userRouter} = require('./routers/userRouter.js');
-const {appRouter}=require('./routers/appRouter.js');
+const {appRouter} = require('./routers/appRouter.js');
 
-app.use(cors());
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
     res.set({
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
@@ -23,7 +22,7 @@ app.use(cors());
         'Content-Type': 'application/json'
     });
     next();
-});*/
+});
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
