@@ -153,19 +153,13 @@ exports.soldierController = {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const {id} = req.params;
-        const [rows]= await connection.execute(`select * from tbl_111_simulationRecords where id = ?`,[id]);
-
-        const formattedRows = rows.map(row => {
-            if (row.date && row.date instanceof Date) {
-                row.date = row.date.toISOString().split('T')[0];
-            }
-            return row;
-        });
-
-        res.json(rows);
-        connection.end()
-        
-        return formattedRows; 
+        try{
+            const [rows]= await connection.execute(`select * from tbl_111_simulationRecords where id = ?`,[id]);
+            res.status(201).json(rows);
+        }catch(error){
+            res.status(500).json({ message: `Error fetching simulation id:${id}`, _id: id });
+        }
+      
     },
     async getSimulationSoldierID(req,res){
         const {dbConnection} = require('../dbConnection');
