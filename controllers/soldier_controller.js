@@ -162,7 +162,7 @@ exports.soldierController = {
         
         return formattedRows; 
     },
-    async getSimulation(req,res){
+    async getSimulationRecord(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const {body} = req;
