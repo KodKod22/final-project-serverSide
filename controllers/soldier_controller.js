@@ -154,7 +154,23 @@ exports.soldierController = {
         const connection = await dbConnection.createConnection();
         const {id} = req.params;
         try{
-            const [rows]= await connection.execute(`select * from tbl_111_simulationRecords inner join
+            const [rows]= await connection.execute(`select  
+                tbl_111_simulationRecords.id,
+                tbl_111_simulationRecords.simulationID,
+                tbl_111_simulationRecords.date,
+                tbl_111_simulationRecords.video,
+                tbl_111_simulations.simulationName,
+                tbl_111_simulations.location,
+                tbl_111_simulations.afvToRescue,
+                tbl_111_simulations.RescueVehicle,
+                tbl_111_simulations.difficulty,
+                s1.name AS CommanderName,
+                s2.name AS DriverName,
+                s3.name AS SafetyOfficerName,
+                s4.name AS TeamMember1Name,
+                s5.name AS TeamMember2Name,
+                s6.name AS TeamMember3Name
+                from tbl_111_simulationRecords inner join
                 tbl_111_simulations on tbl_111_simulations.id = tbl_111_simulationRecords.simulationID 
                 INNER JOIN tbl_111_soldiers s1 ON sim.commanderID = s1.soldierID INNER JOIN 
                 tbl_111_soldiers s2 ON sim.driverID = s2.soldierID
