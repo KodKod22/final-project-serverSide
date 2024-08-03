@@ -154,7 +154,7 @@ exports.soldierController = {
         const connection = await dbConnection.createConnection();
         const {id} = req.params;
         try{
-            const [rows]= await connection.execute(`select  
+            const [rows]= await connection.execute(`SELECT  
                 tbl_111_simulationRecords.id,
                 tbl_111_simulationRecords.simulationID,
                 tbl_111_simulationRecords.date,
@@ -164,26 +164,31 @@ exports.soldierController = {
                 tbl_111_simulations.afvToRescue,
                 tbl_111_simulations.RescueVehicle,
                 tbl_111_simulations.difficulty,
-                s1.name AS CommanderName,
-                s2.name AS DriverName,
-                s3.name AS SafetyOfficerName,
-                s4.name AS TeamMember1Name,
-                s5.name AS TeamMember2Name,
-                s6.name AS TeamMember3Name
-                from tbl_111_simulationRecords inner join
-                tbl_111_simulations on tbl_111_simulations.id = tbl_111_simulationRecords.simulationID 
-                INNER JOIN tbl_111_soldiers s1 ON sim.commanderID = s1.soldierID INNER JOIN 
-                tbl_111_soldiers s2 ON sim.driverID = s2.soldierID
+                s1.name AS CommanderID,
+                s2.name AS DriverID,
+                s3.name AS SafetyOfficerID,
+                s4.name AS TeamMember1ID,
+                s5.name AS TeamMember2ID,
+                s6.name AS TeamMember3ID
+            FROM 
+                tbl_111_simulationRecords 
+            INNER JOIN
+                tbl_111_simulations ON tbl_111_simulations.id = tbl_111_simulationRecords.simulationID 
             INNER JOIN 
-                tbl_111_soldiers s3 ON sim.safetyOfficerID = s3.soldierID
+                tbl_111_soldiers s1 ON tbl_111_simulationRecords.commanderID = s1.soldierID 
+            INNER JOIN 
+                tbl_111_soldiers s2 ON tbl_111_simulationRecords.driverID = s2.soldierID
+            INNER JOIN 
+                tbl_111_soldiers s3 ON tbl_111_simulationRecords.safetyOfficerID = s3.soldierID
             LEFT JOIN 
-                tbl_111_soldiers s4 ON sim.teamMember1ID = s4.soldierID
+                tbl_111_soldiers s4 ON tbl_111_simulationRecords.teamMember1ID = s4.soldierID
             LEFT JOIN 
-                tbl_111_soldiers s5 ON sim.teamMember2ID = s5.soldierID
+                tbl_111_soldiers s5 ON tbl_111_simulationRecords.teamMember2ID = s5.soldierID
             LEFT JOIN 
-                tbl_111_soldiers s6 ON sim.teamMember3ID = s6.soldierID
-               where tbl_111_simulationRecords.id= ? `,[id]);
-            res.status(201).json(rows);
+                tbl_111_soldiers s6 ON tbl_111_simulationRecords.teamMember3ID = s6.soldierID
+            WHERE 
+                tbl_111_simulationRecords.id = 2;`,[id]);
+                        res.status(201).json(rows);
         }catch(error){
             res.status(500).json({ message: `Error fetching simulation id:${id}`, _id: id });
         }
