@@ -152,8 +152,8 @@ exports.soldierController = {
     async getSimulationRecord(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        const {body} = req;
-        const [rows]= await connection.execute(`select * from tbl_111_simulationRecords where id = ?`,[body.simulationId]);
+        const {id} = req.params;
+        const [rows]= await connection.execute(`select * from tbl_111_simulationRecords where id = ?`,[id]);
 
         const formattedRows = rows.map(row => {
             if (row.date && row.date instanceof Date) {
