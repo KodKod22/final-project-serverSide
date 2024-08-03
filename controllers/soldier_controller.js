@@ -1,5 +1,4 @@
 
-
 exports.soldierController = {
     async addSoldier(req, res) {
         const {dbConnection} = require('../dbConnection');
@@ -59,6 +58,16 @@ exports.soldierController = {
         const connection = await dbConnection.createConnection();
         try {
             const [rows] = await connection.execute(`SELECT DISTINCT afvToRescue FROM tbl_111_simulations`);
+            res.status(201).json(rows);
+        } catch (error) {
+            res.status(500).json({ message: 'Error fetching roles' });
+        }
+    },
+    async getDifficultys(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        try {
+            const [rows] = await connection.execute(`SELECT DISTINCT difficulty FROM tbl_111_simulations`);
             res.status(201).json(rows);
         } catch (error) {
             res.status(500).json({ message: 'Error fetching roles' });
