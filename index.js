@@ -33,7 +33,7 @@ app.use('/api/post',operatorRouter);
 app.use('/api/soldiers',soldierRouter);
 app.use('/api/simulationFeedback',simulationFeedbackRouter);
 //app.use('/api', userRouter);
-app.use('/api/app',appRouter)
+app.use('/api/app',appRouter);
 app.get("/simulation",(req,res)=>{
     res.json(simulationData);
 });
