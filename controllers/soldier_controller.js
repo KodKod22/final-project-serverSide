@@ -180,12 +180,35 @@ exports.soldierController = {
         
         return formattedRows; 
     },
+    async getSimulationSoldierID(req,res){
+        const {dbConnection} = require('../dbConnection');
+        const connection = await dbConnection.createConnection();
+        const {body} = req;
+        const [rows]= await connection.execute(`select * from tbl_111_simulations where id = ?`,[body.simulationId]);
+
+        const formattedRows = rows.map(row => {
+            if (row.date && row.date instanceof Date) {
+                row.date = row.date.toISOString().split('T')[0];
+            }
+            return row;
+        });
+
+        res.json(rows);
+        connection.end()
+        
+        return formattedRows; 
+    },
     async getSoldiersProfile(req,res){
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
         const { soldierId } = req.params;
         try{
-            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers WHERE soldierID = ?;`, [soldierId]);
+            const [row] = await connection.execute(`SELECT * FROM tbl_111_soldiers INNER JOIN
+                tbl_111_simulationRecords on tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember1ID OR  
+                tbl_111_soldiers.soldierID = tbl_111_simulationRecords.teamMember2ID OR  tbl_111_soldiers.soldierID = 
+                tbl_111_simulationRecords.teamMember3ID OR  tbl_111_soldiers.soldierID = tbl_111_simulationRecords.driverID OR 
+                tbl_111_soldiers.soldierID = tbl_111_simulationRecords.commanderID OR  tbl_111_soldiers.soldierID = 
+                tbl_111_simulationRecords.safetyOfficerID WHERE tbl_111_soldiers.soldierID = ?`, [soldierId]);
             res.status(201).json(row);
         }catch(error){
             res.status(500).json({ message: `Error fetching soldier id:${soldierId}`, id: soldierId });
