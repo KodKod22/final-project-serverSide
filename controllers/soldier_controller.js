@@ -155,8 +155,18 @@ exports.soldierController = {
         const {id} = req.params;
         try{
             const [rows]= await connection.execute(`select * from tbl_111_simulationRecords inner join
-               tbl_111_simulations on tbl_111_simulations.id = tbl_111_simulationRecords.simulationID 
-               where tbl_111_simulationRecords.id= ?`,[id]);
+                tbl_111_simulations on tbl_111_simulations.id = tbl_111_simulationRecords.simulationID 
+                INNER JOIN tbl_111_soldiers s1 ON sim.commanderID = s1.soldierID INNER JOIN 
+                tbl_111_soldiers s2 ON sim.driverID = s2.soldierID
+            INNER JOIN 
+                tbl_111_soldiers s3 ON sim.safetyOfficerID = s3.soldierID
+            LEFT JOIN 
+                tbl_111_soldiers s4 ON sim.teamMember1ID = s4.soldierID
+            LEFT JOIN 
+                tbl_111_soldiers s5 ON sim.teamMember2ID = s5.soldierID
+            LEFT JOIN 
+                tbl_111_soldiers s6 ON sim.teamMember3ID = s6.soldierID
+               where tbl_111_simulationRecords.id= ? `,[id]);
             res.status(201).json(rows);
         }catch(error){
             res.status(500).json({ message: `Error fetching simulation id:${id}`, _id: id });
