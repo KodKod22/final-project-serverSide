@@ -10,7 +10,7 @@ soldierRouter.get('/getSoldiersProfile/:soldierId', soldierController.getSoldier
 soldierRouter.get('/SimulationsRecords',soldierController.getSimulationsRecords);
 soldierRouter.get('/getAFVs', soldierController.getAFVs);
 soldierRouter.get('/getAllSimulations', soldierController.getSimulations);
-soldierRouter.get('/getSimulationRecord/:simulationID', soldierController.getSimulationRecord);
+soldierRouter.get('/getSimulationRecord/:id', soldierController.getSimulationRecord);
 soldierRouter.get('/getSoldiersProfile', soldierController.getSoldiersProfile);
 soldierRouter.get('/getDifficulty', soldierController.getDifficulty);
 
