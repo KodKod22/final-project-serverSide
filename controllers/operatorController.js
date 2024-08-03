@@ -43,18 +43,17 @@ exports.operatorController = {
     async deleteSimulations(req,res) {
         const {dbConnection} = require('../dbConnection');
         const connection = await dbConnection.createConnection();
-        const [SimulationId] = req.body.SimulationId
-        const [simulationName] = req.body.simulationName
-
-        const [checkMission] = await connection.execute(`select simulation_id from tbl_111_soldierMissions where simulation_id = ?`,SimulationId);
-        if (checkMission.affectedRows != 0) {
-            await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE simulation_id=? `,[SimulationId]);
-            const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
-            connection.end();
-        }else{
-            const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
-            connection.end();
+        const {SimulationId,simulationName} = req.body;
+        
+        
+        const [checkMission] = await connection.execute(`select simulation_id from tbl_111_soldierMissions where simulation_id = ?`,[SimulationId]);
+        
+        if (checkMission.length > 0) {
+           await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE simulation_id=? `,[checkMission]);
+    
         }
+        console.log(SimulationId);
+        const [result] = await connection.execute(`DELETE FROM tbl_111_simulations WHERE id=? and simulationName = ?`,[SimulationId,simulationName]);
        
         if (result.affectedRows === 0) {
             res.status(404).json({ message: 'Simulation not found' });
