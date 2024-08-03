@@ -49,7 +49,7 @@ exports.operatorController = {
         const [checkMission] = await connection.execute(`select simulation_id from tbl_111_soldierMissions where simulation_id = ?`,[SimulationId]);
         
         if (checkMission.length > 0) {
-           await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE simulation_id=? `,[checkMission]);
+           await connection.execute(`DELETE FROM tbl_111_soldierMissions WHERE simulation_id=? `,[SimulationId]);
     
         }
         console.log(SimulationId);
